@@ -1,0 +1,25 @@
+#include <Servo.h>
+#include <Encoder.h>
+
+// Define the servo and encoder objects
+Servo myServo;
+Encoder myEncoder(2, 3); // Connect encoder GND and CLK to digital pins 2 and 3
+
+void setup() {
+  // Attach the servo to pin 9
+  myServo.attach(9);
+}
+
+void loop() {
+  // Read the current position of the encoder
+  int encoderValue = myEncoder.read();
+
+  // Map the encoder value to servo angles (0 to 180 degrees)
+  int servoAngle = map(encoderValue*15, 20, 1023, 90, 180);
+
+  // Move the servo to the calculated angle
+  myServo.write(servoAngle);
+
+  // Add a delay for smoother movement
+  delay(20);
+}
